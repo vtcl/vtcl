@@ -1,0 +1,58 @@
+##############################################################################
+#
+# Copyright (C) 2007 Tristan  http://www.tcltk.cn
+#
+# Description file for Tile Widget
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+##############################################################################
+
+Class		TProgressbar
+Lib		tile
+
+CreateCmd	ttk::progressbar
+Icon		icon_progressbar.gif
+DumpChildren	no
+MegaWidget  yes
+Resizable	horizontal
+TreeLabel	@vTcl::widgets::vtcl::tile::progressbar::getWidgetTreeLabel
+InsertCmd	vTcl::widgets::vtcl::tile::progressbar::insertCmd
+ResizeCmd	vTcl::widgets::vtcl::tile::progressbar::resizeCmd
+
+namespace eval vTcl::widgets::vtcl::tile::progressbar {
+
+    proc resizeCmd {widget w h} {
+        $widget configure -width [expr $w - 10]
+    }
+
+    proc insertCmd {target} {
+        set last [lindex [split $target .] end]
+        set last [vTcl:rename $last]
+        set name "[winfo toplevel $target]::$last"
+
+        $target configure -variable $name
+    }
+
+    proc getWidgetTreeLabel {target} {
+        set var [$target cget -variable]
+	if {$var != ""} {
+	    return "Tile Progress Bar VAR=$var"
+	} else {
+	    return "Tile Progress Bar"
+	}
+    }
+}
+

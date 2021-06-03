@@ -1,0 +1,71 @@
+##############################################################################
+#
+# Copyright (C) 2007 Tristan  http://www.tcltk.cn
+#
+# Description file for Tile Widget
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+##############################################################################
+
+Class		TButton
+Lib		tile
+
+Icon		icon_button.gif
+DefaultOptions	-text button -class TButton
+DefaultValues   -activebackground -activeforeground -activeborderwidth \
+                -background -foreground -highlightbackground -highlightcolor
+ClassOption     -_tooltip
+
+CreateCmd ttk::button
+
+DoubleClickCmd	vTcl::widgets::tile::button::dblClk
+TreeLabel	@vTcl::widgets::tile::button::getWidgetTreeLabel
+
+Function	"Set Text"	vTcl::widgets::tile::button::setText
+Function    "Set Multiline Text"  vTcl::widgets::tile::button::setMultilineText
+Function	"Set Command"	vTcl::widgets::tile::button::setCommand
+
+namespace eval vTcl::widgets::tile::button {
+
+    proc setText {} {
+        global vTcl
+        vTcl:set_label $vTcl(w,widget)
+    }
+
+    proc setMultilineText {} {
+        vTcl:set_text $::vTcl(w,widget)
+    }
+
+    proc setCommand {} {
+        global vTcl
+        vTcl:set_command $vTcl(w,widget) -command vTcl(w,opt,-command)
+    }
+
+    proc dblClk {target} {
+        vTcl:set_command $target -command vTcl(w,opt,-command)
+    }
+
+    proc getWidgetTreeLabel {target} {
+        set ttt1 [$target cget -text]
+        set ttt2 [$target cget -textvariable]
+
+        if {$ttt2 == ""} {
+            return "BUT: $ttt1"
+        } else {
+            return "BUT: $ttt1 var=$ttt2"
+        }
+    }
+}
+
