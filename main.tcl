@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (C) 2007 Tristan  http://www.tcltk.cn
+# Copyright (C) 2021 aska http://www.vtcl.org
 #
 # Description file for Starkit/Starpack
 #
@@ -17,12 +17,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
 ##############################################################################
 
 package require starkit
 starkit::startup
 
-# Tristan 2008-06-26
 proc vTcl:initVTclBinary {} {
     global vTcl
     global auto_path
@@ -43,3 +43,4 @@ proc vTcl:initVTclBinary {} {
 
 vTcl:initVTclBinary
 source [file join $starkit::topdir vtcl.tcl]
+
