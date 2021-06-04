@@ -1,1 +1,1 @@
-# Visual Tcl 1.8.0
+Visual Tcl developer.
