@@ -197,6 +197,7 @@ proc vTcl:setup {} {
 
     set tk_strictMotif    1
     
+    # Set application's icon.
     set logoImg [image create photo -file [file join [file dirname [info script]] "images" "logo.png"]]
     wm iconphoto . -default $logoImg
         

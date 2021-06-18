@@ -142,24 +142,24 @@ proc vTclWindow.vTcl.ae {args} {
     set w $f1.f
     ttk::frame $w; pack $w -side top -expand 1 -fill both
 
-    label $w.ln -text "Widget" -width 11 -anchor w
-        vTcl:entry $w.en -width 12 -textvariable vTcl(w,widget) \
+    label $w.ln -text "Widget" -width 16 -anchor w
+        vTcl:entry $w.en -width 16 -textvariable vTcl(w,widget) \
         -relief sunken   -state disabled
-    label $w.lc -text "Class"  -width 11 -anchor w
-        vTcl:entry $w.ec -width 12 -textvariable vTcl(w,class) \
+    label $w.lc -text "Class"  -width 16 -anchor w
+        vTcl:entry $w.ec -width 16 -textvariable vTcl(w,class) \
         -relief sunken   -state disabled
-    label $w.lm -text "Manager" -width 11 -anchor w
-        vTcl:entry $w.em -width 12 -textvariable vTcl(w,manager) \
+    label $w.lm -text "Manager" -width 16 -anchor w
+        vTcl:entry $w.em -width 16 -textvariable vTcl(w,manager) \
         -relief sunken   -state disabled
-    label $w.la -text "Alias"  -width 11 -anchor w
-    vTcl:entry $w.ea -width 12 -textvariable vTcl(w,alias) \
+    label $w.la -text "Alias"  -width 16 -anchor w
+    vTcl:entry $w.ea -width 16 -textvariable vTcl(w,alias) \
         -relief sunken
     bind $w.ea <KeyRelease-Return> "
         ::vTcl::properties::setAlias \$::vTcl(w,widget) ::vTcl(w,alias) $w.ea"
     bind $w.ea <FocusOut> "
         ::vTcl::properties::setAlias \$::vTcl(w,widget) ::vTcl(w,alias) $w.ea"
-    label $w.li -text "Insert Point" -width 11 -anchor w
-        vTcl:entry $w.ei -width 12 -textvariable vTcl(w,insert) \
+    label $w.li -text "Insert Point" -width 16 -anchor w
+        vTcl:entry $w.ei -width 16 -textvariable vTcl(w,insert) \
         -relief sunken   -state disabled
 
     grid columnconf $w 1 -weight 1
@@ -523,7 +523,7 @@ proc vTcl:prop:new_attr {top option variable config_cmd config_args prefix {isGe
     }
 
     set label $top.$option
-    label $label -text $text -anchor w -width 11 -fg black \
+    label $label -text $text -anchor w -width 16 -fg black \
     	-relief $vTcl(pr,proprelief)
 
     set focusControl $base
