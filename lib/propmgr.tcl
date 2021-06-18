@@ -125,13 +125,13 @@ proc vTclWindow.vTcl.ae {args} {
     set f3 $c.f3; ttk::frame $f3       ; # Widget Geometry
         $c create window 0 0 -window $f3 -anchor nw -tag geom
 
-    label $f1.l -text "Widget" -relief raised -bg #aaaaaa -bd 1 -width 30 \
+    label $f1.l -text "Widget" -relief raised -bg #aaaaaa -bd 1 -width 35 \
     	-anchor center
         pack $f1.l -side top -fill x
-    label $f2.l -text "Attributes" -relief raised -bg #aaaaaa -bd 1 -width 30 \
+    label $f2.l -text "Attributes" -relief raised -bg #aaaaaa -bd 1 -width 35 \
     	-anchor center
         pack $f2.l -side top -fill x
-    label $f3.l -text "Geometry"   -relief raised -bg #aaaaaa -bd 1 -width 30 \
+    label $f3.l -text "Geometry"   -relief raised -bg #aaaaaa -bd 1 -width 35 \
     	-anchor center
         pack $f3.l -side top -fill x
 
