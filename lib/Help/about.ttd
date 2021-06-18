@@ -196,7 +196,7 @@ ttd.tagoff Header
 ttd.text {
 }
 ttd.tagon body
-ttd.text {Copyright (c) 2008 - 2021 Cui Xiao Liang}
+ttd.text {Copyright (c) 2008-2021 Cui Xiao Liang}
 ttd.tagoff body
 ttd.text {
 }
