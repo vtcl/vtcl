@@ -1,6 +1,6 @@
 [Setup]
 AppName=Visual Tcl
-AppVerName=Visual Tcl 1.8
+AppVerName=Visual Tcl 1.6.2
 AppPublisher=http://vtcl.org
 AppPublisherURL=http://vtcl.org
 AppSupportURL=http://vtcl.org

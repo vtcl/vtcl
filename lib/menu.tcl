@@ -117,7 +117,6 @@ set vTcl(menu,widget) {}
 
 set vTcl(menu,help) {
     {{&About Visual Tcl...}        {}         {Window show .vTcl.about}      }
-    {{About Visual Tcl &Binary...} {}         {tk_messageBox -title {Visual Tcl Binary} -message "Please visit this website:\n\nhttp://www.vtcl.org" }   }
     {{&Libraries...}               {}         {Window show .vTcl.infolibs}   }
     {{Index of &Help...}           {}         {Window show .vTcl.help}       }
     {separator                     {}         {}                         }
