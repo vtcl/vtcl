@@ -1,10 +1,10 @@
 [Setup]
 AppName=Visual Tcl
-AppVerName=Visual Tcl 1.6
-AppPublisher=http://vtcl.sf.net
-AppPublisherURL=http://vtcl.sf.net
-AppSupportURL=http://vtcl.sf.net
-AppUpdatesURL=http://vtcl.sf.net
+AppVerName=Visual Tcl 1.8
+AppPublisher=http://vtcl.org
+AppPublisherURL=http://vtcl.org
+AppSupportURL=http://vtcl.org
+AppUpdatesURL=http://vtcl.org
 DefaultDirName={pf}\vtcl
 DefaultGroupName=Visual Tcl
 AllowNoIcons=yes
