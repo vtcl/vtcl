@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (C) 2007 Tristan  http://www.tcltk.cn
+# Copyright (C) 2007-2022 Alex http://vtcl.org
 #
 # Description file for Tile Widget
 #
@@ -35,7 +35,9 @@ ResizeCmd	vTcl::widgets::vtcl::tile::progressbar::resizeCmd
 namespace eval vTcl::widgets::vtcl::tile::progressbar {
 
     proc resizeCmd {widget w h} {
-        $widget configure -width [expr $w - 10]
+    	if {[expr $::tcl_version < "8.6"]} {
+        	widget configure -width $w -height $h
+        }
     }
 
     proc insertCmd {target} {

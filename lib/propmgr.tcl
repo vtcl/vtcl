@@ -809,7 +809,7 @@ proc vTcl:prop:update_saves {w} {
 
     foreach opt [concat $vTcl(w,optlist) $spec_opts] {
     	set check $c.f2.f._$class.t${opt}_save
-	if {![winfo exists $check]} { continue }
+	    if {![winfo exists $check]} { continue }
         $check configure -variable ::widgets::${w}::save($opt)
     }
 }

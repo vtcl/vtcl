@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (C) 2007 Tristan  http://www.tcltk.cn
+# Copyright (C) 2007-2022 Alex http://vtcl.org
 #
 # Description file for Tile Widget
 #
@@ -35,7 +35,8 @@ Insertable
 
 CreateCmd ttk::frame
 
-NewOption -class     "class"      typeNewOption -container "container"  boolean
+NewOption -class     "class"      type
+NewOption -container "container"  boolean
 NewOption -visual    "visual"     type
 
 ## Right-click menu

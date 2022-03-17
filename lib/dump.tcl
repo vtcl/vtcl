@@ -289,6 +289,10 @@ proc vTcl:save_tree {target {basedir ""} {project_name ""}} {
 
 proc vTcl:valid_class {class} {
     global vTcl
+    
+    # Show widgets's real class name.
+    # puts "---> $class"
+    
     if {[lsearch $vTcl(classes) $class] >= 0} {
         return 1
     } else {

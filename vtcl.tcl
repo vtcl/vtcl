@@ -1,6 +1,4 @@
-#!/bin/sh
-# the next line restarts using wish\
-exec wish "$0" "$@"
+#!/usr/bin/env wish
 
 # $Id: vtcl.tcl,v 1.49 2006/07/28 13:43:55 unixabg Exp $
 
@@ -26,11 +24,8 @@ exec wish "$0" "$@"
 
 ##############################################################################
 
-lappend auto_path [file join [file dirname [info script]] themes]
-
 package require Tk
 package require tile
-package require ttk::theme::black
 
 ## for Tcl/Tk 8.4
 if {![llength [info commands tkTextInsert]]} {
@@ -321,9 +316,6 @@ proc vTcl:setup_gui {} {
     option add *selectForeground black
     #option add *Text.background  #7f7f85
     
-    #ttk::style theme use clam
-    #ttk::style theme use plastik
-    #ttk::style theme use black
     ttk::style configure . -font {Monospace 10}
 
     vTcl:setup_bind_tree .
@@ -718,7 +710,7 @@ proc vTcl:main {argc argv} {
         ## init the bindings editor
         ::widgets_bindings::init
 
-        vTcl:splash_status "              vTcl Loaded" -nodots
+        vTcl:splash_status "vTcl Loaded" -nodots
         after 1000 {if {[winfo exists .x]} {destroy .x}}
 
         ## load file passed in command line, get rid of splash window right here
@@ -751,17 +743,10 @@ proc vTcl:main {argc argv} {
     #    Window show .vTcl.tip
     #}
 
-    ## Show vTcl news.
+    # Show vTcl news.
     #if {!$vTcl(pr,dontshownews)} {
 	#    set vTcl(tmp,newsAfter) [after 5000 ::vTcl::news::get_news]
     #}
 }
 
 vTcl:main $argc $argv
-
-
-
-
-
-
-

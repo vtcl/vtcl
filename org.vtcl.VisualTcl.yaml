@@ -1,0 +1,138 @@
+app-id: org.vtcl.VisualTcl
+runtime: org.gnome.Platform
+runtime-version: '41'
+sdk: org.gnome.Sdk
+command: vtcl.tcl
+copy-icon: true
+separate-locales: false
+build-options:
+  no-debuginfo: true
+finish-args:
+  - --share=ipc
+  - --device=dri
+  - --socket=x11
+  - --share=network
+  - --socket=wayland
+  - --filesystem=host
+  - --socket=pulseaudio
+cleanup:
+  - '*.o'
+  - '*.a'
+  - /app/src
+  - /app/man
+  - /lib/pkgconfig
+
+modules:
+  - name: vtcl
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 vtcl.tcl /app/bin/vtcl.tcl
+      - install -Dm755 LICENSE /app/bin/LICENSE
+      - install -Dm644 org.vtcl.VisualTcl.desktop /app/share/applications/org.vtcl.VisualTcl.desktop
+      - install -Dm644 org.vtcl.VisualTcl.png /app/share/icons/hicolor/128x128/apps/org.vtcl.VisualTcl.png
+    sources:
+      - type: file
+        path: vtcl.tcl
+      - type: file
+        path: LICENSE
+      - type: file
+        path: org.vtcl.VisualTcl.desktop
+      - type: file
+        path: org.vtcl.VisualTcl.png
+
+  - name: images
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin/images
+      - cp -r * /app/bin/images
+    sources:
+      - type: dir
+        path: images/
+        
+  - name: lib
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/bin/lib
+      - cp -r * /app/bin/lib
+    sources:
+      - type: dir
+        path: lib/
+        
+  # tcl
+  - name: tcl
+    buildsystem: autotools
+    subdir: unix
+    build-options:
+      config-opts:
+        - --enable-threads
+    post-install:
+      - ln -sf /app/bin/tclsh8.6 /app/bin/tclsh
+      - chmod 755 /app/lib/*.so
+    sources:
+      - type: archive
+        url: https://nchc.dl.sourceforge.net/project/tcl/Tcl/8.6.12/tcl8.6.12-src.tar.gz
+        sha256: 26c995dd0f167e48b11961d891ee555f680c175f7173ff8cb829f4ebcde4c1a6
+
+  # tk
+  - name: tk
+    buildsystem: autotools
+    subdir: unix
+    post-install:
+      - ln -sf /app/bin/wish8.6 /app/bin/wish
+      - chmod 755 /app/lib/*.so
+    sources:
+      - type: archive
+        url: https://nchc.dl.sourceforge.net/project/tcl/Tcl/8.6.12/tk8.6.12-src.tar.gz
+        sha256: 12395c1f3fcb6bed2938689f797ea3cdf41ed5cb6c4766eec8ac949560310630
+
+  # tcllib
+  - name: tcllib
+    buildsystem: autotools
+    post-install:
+      - chmod 755 /app/lib/*.so
+    sources:
+      - type: archive
+        url: https://core.tcl-lang.org/tcllib/uv/tcllib-1.20.tar.gz
+        sha256: e3b097475bcb93c4439df4a088daa59592e1937beee2a2c8495f4f0303125d71
+
+  # tklib
+  - name: tklib
+    buildsystem: autotools
+    post-install:
+      - chmod 755 /app/lib/*.so
+    sources:
+      - type: archive
+        url: https://core.tcl-lang.org/tklib/tarball/tklib-0.7.tar.gz
+        sha256: 68bb0bdefe264a255139bd03b68e7b514dea364b175d04e70020ce6b7345f973
+
+  # tkimg
+  - name: tkimg
+    buildsystem: autotools
+    post-install:
+      - chmod 755 /app/lib/*.so
+    sources:
+      - type: archive
+        url: https://jaist.dl.sourceforge.net/project/tkimg/tkimg/1.4/tkimg%201.4.13/Img-1.4.13-Source.tar.gz
+        sha256: f0868c1cad9752dcf1234f81f00c417d34a11c0f0dd499ba469df29f1c40d163
+
+  # bwidget
+  - name: bwidget
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/bwidget
+      - cp -r * /app/lib/bwidget
+    sources:
+      - type: archive
+        url: https://jaist.dl.sourceforge.net/project/tcllib/BWidget/1.9.15/BWidget-1.9.15.zip
+        sha256: edcf580512170aba9ba6c55854e3b9ec6a11a3b08dcfb89bac99901971687c40
+
+  # tablelist
+  - name: tablelist
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/tablelist
+      - cp -r * /app/lib/tablelist
+    sources:
+      - type: archive
+        url: https://www.nemethi.de/tablelist/tablelist6.17.tar.gz
+        sha256: f73d842f4ff948fb3e594cf3eeaf778f51f75987df23723ded1a5d61302791d2

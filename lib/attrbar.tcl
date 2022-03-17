@@ -212,17 +212,17 @@ proc vTcl:attrbar {args} {
         -anchor center -expand 0 -fill y -ipadx 0 -ipady 0 -padx 0  -pady 0 \
 	-side left
    
-    vTcl:toolbar_button .vTcl.attr.filebar.new -image image5\
+    vTcl:toolbar_button .vTcl.attr.filebar.new -image image6\
         -command vTcl:new 
     vTcl:set_balloon .vTcl.attr.filebar.new "New Project"
     pack .vTcl.attr.filebar.new -side left -padx 1 -pady 1
     
-    vTcl:toolbar_button  .vTcl.attr.filebar.open -image image7 \
-        -command vTcl:open 
+    vTcl:toolbar_button  .vTcl.attr.filebar.open -image image8 \
+        -command vTcl:open
     vTcl:set_balloon .vTcl.attr.filebar.open "Open Project"
     pack .vTcl.attr.filebar.open -side left -padx 1 -pady 1
 
-    vTcl:toolbar_button .vTcl.attr.filebar.save -image image8 \
+    vTcl:toolbar_button .vTcl.attr.filebar.save -image image9 \
         -command vTcl:save 
     vTcl:set_balloon .vTcl.attr.filebar.save "Save Project"
     pack .vTcl.attr.filebar.save -side left -padx 1 -pady 1
@@ -235,15 +235,15 @@ proc vTcl:attrbar {args} {
         -anchor center -expand 0 -fill y -ipadx 0 -ipady 0 -padx 0 -pady 0 \
 	-side left
     
-    vTcl:toolbar_button .vTcl.attr.clipbar.cut -image image2 -command vTcl:cut
+    vTcl:toolbar_button .vTcl.attr.clipbar.cut -image image3 -command vTcl:cut
     vTcl:set_balloon .vTcl.attr.clipbar.cut "Cut"
     pack .vTcl.attr.clipbar.cut -side left -padx 1 -pady 1
     
-    vTcl:toolbar_button .vTcl.attr.clipbar.copy -image image1 -command vTcl:copy
+    vTcl:toolbar_button .vTcl.attr.clipbar.copy -image image2 -command vTcl:copy
     vTcl:set_balloon .vTcl.attr.clipbar.copy "Copy"
     pack .vTcl.attr.clipbar.copy -side left -padx 1 -pady 1
     
-    vTcl:toolbar_button .vTcl.attr.clipbar.paste -image image4 -command vTcl:paste
+    vTcl:toolbar_button .vTcl.attr.clipbar.paste -image image5 -command vTcl:paste
     vTcl:set_balloon .vTcl.attr.clipbar.paste "Paste"
     pack .vTcl.attr.clipbar.paste -side left -padx 1 -pady 1
 

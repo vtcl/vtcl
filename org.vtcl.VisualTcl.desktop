@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Visual Tcl
+Comment=Programming Tool
+Exec=vtcl.tcl
+Terminal=false
+Type=Application
+Icon=org.vtcl.VisualTcl
+Categories=Development;

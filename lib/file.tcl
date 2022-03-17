@@ -394,154 +394,21 @@ proc vTcl:save_as_binary {} {
 
     set vTcl(save) all
     set vTcl(w,save) $vTcl(w,widget)
-    set file [vTcl:get_file save "Save Project With Binary"]
-    #vTcl:open  $file
+    set file [vTcl:get_file save "Save Project as Flatpak"]
     vTcl:save2 $file
 
     update
-
-    #set types {
-    #    {{TCL Scripts} {.tcl}}
-    #}
-
-    #set file [tk_getOpenFile -filetypes $types]
 
     if {$file == ""} { return }
 
     update
 
-    vTcl:status "Creating binary..."
+    vTcl:status "Creating Flatpak..."
 
-    set vfs_dir        "[file rootname $file].vfs"
-    set vfs_lib        [file join $vfs_dir lib]
-    set bin_dir        [file join [file dirname $file] bin]
-    set main_files_dir [file join [file dirname $file] main]
-    file mkdir $vfs_dir
-    file mkdir $vfs_lib
-    file mkdir $bin_dir
-    file mkdir $main_files_dir
-    set makefile     [file join [file dirname $file] Makefile]
-    set make_tcl_bat [file join [file dirname $file] make_tcl.bat]
-    set make_tbc_bat [file join [file dirname $file] make_tbc.bat]
-
-    if {[string tolower $tcl_platform(platform)] == "windows"} {
-        set tclkit     [file join $bin_dir tclkit.exe]
-        set tclkit-x86 [file join $bin_dir tclkit-x86.exe]
-        set sdx        [file join $bin_dir sdx.kit]
-        #file delete -force $tclkit
-        #file delete -force $tclkit-x86
-        #file delete -force $sdx
-        file copy -force [file join $env(VTCL_HOME) tclkit tclkit.exe]     $tclkit
-        file copy -force [file join $env(VTCL_HOME) tclkit tclkit-x86.exe] ${tclkit-x86}
-        file copy -force [file join $env(VTCL_HOME) tclkit sdx.kit]        $sdx
-        #set exe_filename "[file rootname $file].exe"
-
-        if {[llength [glob -nocomplain [file join $vfs_lib *]]] == 0} {
-            foreach dir [glob [file join $env(VTCL_HOME) bin windows *]] {
-                file copy -force $dir $vfs_lib
-            }
-        }
-
-    } elseif {[string tolower $tcl_platform(platform)] == "unix"} {
-        set tclkit     [file join $bin_dir tclkit]
-        set tclkit-x86 [file join $bin_dir tclkit-x86]
-        set sdx        [file join $bin_dir sdx.kit]
-        #file delete -force $tclkit
-        #file delete -force $tclkit-x86
-        #file delete -force $sdx
-        file copy -force [file join $env(VTCL_HOME) tclkit tclkit]     $tclkit
-        file copy -force [file join $env(VTCL_HOME) tclkit tclkit-x86] ${tclkit-x86}
-        file copy -force [file join $env(VTCL_HOME) tclkit sdx.kit]    $sdx
-        exec chmod +x $tclkit
-        #set exe_filename [file rootname $file]
-
-        if {[llength [glob -nocomplain [file join $vfs_lib *]]] == 0} {
-            foreach dir [glob [file join $env(VTCL_HOME) bin linux *]] {
-                file copy -force $dir $vfs_lib
-            }
-        }
-    }
-
-    #file copy -force $file $vfs_dir
-    #file copy -force [file join $env(VTCL_HOME) tclkit tclkit.ico] $vfs_dir
-
-    # Create main.tcl for .tcl
-    set fout [open [file join $main_files_dir main_tcl.tcl] w]
-    puts $fout {package require starkit}
-    puts $fout {starkit::startup}
-
-    if {[string tolower $tcl_platform(platform)] == "windows"} {
-        puts $fout {if {[string tolower $tcl_platform(platform)] == "windows"} { encoding system cp936 }}
-    }
-
-    puts $fout "source \[file join \$starkit::topdir [file tail $file]\]"
-    close $fout
-
-    # Create main.tcl for .tbc
-    set fout [open [file join $main_files_dir main_tbc.tcl] w]
-    puts $fout {package require starkit}
-    puts $fout {starkit::startup}
-
-    if {[string tolower $tcl_platform(platform)] == "windows"} {
-        puts $fout {if {[string tolower $tcl_platform(platform)] == "windows"} { encoding system cp936 }}
-    }
-
-    puts $fout "source \[file join \$starkit::topdir [file tail [file rootname $file]].tbc\]"
-    close $fout
-
-    ;#foreach dir {Img1.3 bwidget kpwidgets tkvideo itcl3.4 itk3.4 iwidgets4.0.2 Tktable2.9 vu2.3 tablelist tcom} {
-    ;#    catch { file copy -force [file join $env(VTCL_HOME) lib $dir] $vfs_lib }
-    ;#}
-
-    foreach dir {kpwidgets itcl3.4 itk3.4 iwidgets4.0.2} {
-        catch { file copy -force [file join $env(VTCL_HOME) lib $dir] $vfs_lib }
-    }
-
-    # Create Makefile
     if {[string tolower $tcl_platform(platform)] == "unix"} {
-        set fout [open $makefile w]
-        puts $fout {tcl:}
-        puts $fout "\tcp ./main/main_tcl.tcl ./[file tail [file rootname $file]].vfs/main.tcl"
-        puts $fout "\tcp ./[file tail $file] ./[file tail [file rootname $file]].vfs"
-        puts $fout "\t./bin/tclkit ./bin/sdx.kit wrap [file tail [file rootname $file]] -runtime ./bin/tclkit-x86"
-
-        puts $fout {tbc:}
-        puts $fout "\tcp ./main/main_tbc.tcl ./[file tail [file rootname $file]].vfs/main.tcl"
-        puts $fout "\tcp ./[file tail [file rootname $file]].tbc ./[file tail [file rootname $file]].vfs"
-        puts $fout "\t./bin/tclkit ./bin/sdx.kit wrap [file tail [file rootname $file]] -runtime ./bin/tclkit-x86"
-
-        close $fout
     }
 
-    # Create make_tcl.bat
-    if {[string tolower $tcl_platform(platform)] == "windows"} {
-        set fout [open $make_tcl_bat w]
-
-        puts $fout "copy .\\main\\main_tcl.tcl .\\[file tail [file rootname $file]].vfs\\main.tcl /y"
-        puts $fout "copy .\\[file tail $file] .\\[file tail [file rootname $file]].vfs /y"
-        puts $fout ".\\bin\\tclkit.exe .\\bin\\sdx.kit wrap [file tail [file rootname $file]].exe -runtime .\\bin\\tclkit-x86.exe"
-
-        close $fout
-    }
-
-    # Create make_tbc.bat
-    if {[string tolower $tcl_platform(platform)] == "windows"} {
-        set fout [open $make_tbc_bat w]
-
-        puts $fout "copy .\\main\\main_tbc.tcl .\\[file tail [file rootname $file]].vfs\\main.tcl /y"
-        puts $fout "copy .\\[file tail [file rootname $file]].tbc .\\[file tail [file rootname $file]].vfs /y"
-        puts $fout ".\\bin\\tclkit.exe .\\bin\\sdx.kit wrap [file tail [file rootname $file]].exe -runtime .\\bin\\tclkit-x86.exe"
-
-        close $fout
-    }
-
-    #exec $tclkit $sdx wrap $exe_filename -runtime $tclkit-x86
-    #file delete -force $vfs_dir
-    #file delete -force $tclkit
-    #file delete -force $tclkit-x86
-    #file delete -force $sdx
-
-    vTcl:status "Binary Done"
+    vTcl:status "Flatpak Done"
 }
 
 # @@end_change

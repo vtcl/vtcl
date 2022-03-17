@@ -1,6 +1,6 @@
 ##############################################################################
 #
-# Copyright (C) 2007 Tristan  http://www.tcltk.cn
+# Copyright (C) 2007-2022 Alex http://vtcl.org
 #
 # Description file for Tile Widget
 #
@@ -27,4 +27,5 @@ DefaultOptions	-class TSeparator
 Icon		icon_BwSeparator.gif
 TreeLabel	Tile Separator
 CreateCmd	ttk::separator
-MegaWidget	yes
+MegaWidget	yes
+
