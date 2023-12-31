@@ -384,10 +384,7 @@ proc vTcl:save_as {} {
     vTcl:save2 $file
 }
 
-# @@change by Tristan 2008/03/06
-# http://www.tcltk.cn
-# added support for starpack to generate executables
-# under Linux and Windows
+# @@change by Alex
 
 proc vTcl:save_as_binary {} {
     global vTcl env tcl_platform
